@@ -1,10 +1,8 @@
 ﻿using StackChatAPI.Application.Interfaces.Repositories;
 using StackChatAPI.Domain.DataModels;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace StackChatAPI.Infrastructure.Persistence.Repositories
