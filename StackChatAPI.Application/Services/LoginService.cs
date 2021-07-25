@@ -33,6 +33,9 @@ namespace StackChatAPI.Application.Services
                     await _userRepositoryAsync.UpdateAsync(user);
                 }
 
+                userDto.id = user.Id;
+                userDto.createdAt = user.CreatedAt;
+
                 return new Response<UserDto>(userDto);
             }
             else
