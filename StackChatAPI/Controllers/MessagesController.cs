@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StackChatAPI.Application.Interfaces.Services;
+using StackChatAPI.Application.Parameters;
 using StackChatAPI.Domain.DTOs;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -16,9 +17,9 @@ namespace StackChatAPI.Controllers
         }
 
         [System.Web.Http.HttpGet]
-        public async Task<IActionResult> GetAllMessages()
+        public async Task<IActionResult> GetAllMessages([FromQuery] int pageNumber, [FromQuery] int pageSize)
         {
-            return new OkObjectResult(await _messageService.GetAllMessages());
+            return new OkObjectResult(await _messageService.GetAllMessages(pageNumber, pageSize));
         }
 
         public async Task<IActionResult> PostMessage(MessageDto message)

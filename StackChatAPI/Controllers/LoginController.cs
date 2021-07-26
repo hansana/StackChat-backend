@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNet.SignalR;
+using Microsoft.AspNetCore.Mvc;
 using StackChatAPI.Application.Interfaces.Services;
 using StackChatAPI.Domain.DTOs;
+using System;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -11,6 +13,8 @@ namespace StackChatAPI.Controllers
     {
         private readonly ILoginService _loginService;
 
+        IHubContext hubContext = GlobalHost.ConnectionManager.GetHubContext<StackHub>();
+
         public LoginController(ILoginService loginService)
         {
             _loginService = loginService;
@@ -19,7 +23,10 @@ namespace StackChatAPI.Controllers
         [System.Web.Http.HttpPost]
         public async Task<IActionResult> LoginUser(UserDto user)
         {
-            return new OkObjectResult(await _loginService.RegisterUser(user));
+            var response = await _loginService.RegisterUser(user);
+            hubContext.Clients.All.userLogin(user.userName + " Logged in!");
+
+            return new OkObjectResult(response);
         }
     }
 }

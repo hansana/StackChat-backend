@@ -1,5 +1,6 @@
 ﻿using StackChatAPI.Application.Interfaces.Repositories;
 using StackChatAPI.Application.Interfaces.Services;
+using StackChatAPI.Application.Parameters;
 using StackChatAPI.Domain.DataModels;
 using StackChatAPI.Domain.DTOs;
 using System.Collections.Generic;
@@ -17,9 +18,9 @@ namespace StackChatAPI.Application.Services
             _messageRepositoryAsync = messageRepositoryAsync;
         }
 
-        public async Task<IEnumerable<MessageDto>> GetAllMessages()
+        public async Task<IEnumerable<MessageDto>> GetAllMessages(int pageNumber, int pageSize)
         {
-            var messages = await _messageRepositoryAsync.GetAllAsync();
+            var messages = await _messageRepositoryAsync.GetPagedMessages(pageNumber, pageSize);
             var msgDtos = new List<MessageDto>();
             foreach (var message in messages)
             {

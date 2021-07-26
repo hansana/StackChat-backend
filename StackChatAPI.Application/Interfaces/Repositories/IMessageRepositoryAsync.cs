@@ -9,5 +9,6 @@ namespace StackChatAPI.Application.Interfaces.Repositories
 {
     public interface IMessageRepositoryAsync : IGenericRepositoryAsync<Message>
     {
+        Task<IEnumerable<Message>> GetPagedMessages(int pageNumber, int pageSize);
     }
 }

@@ -1,4 +1,5 @@
-﻿using StackChatAPI.Domain.DTOs;
+﻿using StackChatAPI.Application.Parameters;
+using StackChatAPI.Domain.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace StackChatAPI.Application.Interfaces.Services
 {
     public interface IMessageService
     {
-        Task<IEnumerable<MessageDto>> GetAllMessages();
+        Task<IEnumerable<MessageDto>> GetAllMessages(int pageNumber, int pageSize);
         Task<MessageDto> SaveMessage(MessageDto message);
     }
 }
